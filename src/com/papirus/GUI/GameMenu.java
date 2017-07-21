@@ -29,7 +29,7 @@ public class GameMenu extends JWindow {
         topPane.setLayout(new BorderLayout(100,100));
         contenPane.add(topPane, BorderLayout.NORTH);
 
-        gameLogo = new JLabel(Papirus.loadImage(Papirus.PLAY_LOGO_64));
+        gameLogo = new JLabel(Papirus.loadImage(Papirus.PAPIRUS_LOGO));
         gameLogo.setOpaque(false); // TODO 1
         topPane.add(gameLogo, BorderLayout.CENTER);
 
@@ -46,7 +46,6 @@ public class GameMenu extends JWindow {
         contenPane.add(bottomPane, BorderLayout.SOUTH);
 
         windowBorder = new EmptyBorder(30,30,30,30);
-        rootPane.set
         rootPane.setBorder(windowBorder);
     }
 
