@@ -32,15 +32,13 @@ public class GameMenu extends JWindow {
         contenPane.setBackground(Color.CYAN);
 
 
-<<<<<<< Updated upstream
         // Game logo
         gameLogo = new JLabel(Papirus.loadImage(Papirus.PAPIRUS_LOGO));
-=======
+
         contenPane.setBackground(Color.green);
 
         gameLogo = new JLabel(Papirus.loadImage(Papirus.PAPIRUS_LOGO));
         //gameLogo.setOpaque(true); // TODO 1
->>>>>>> Stashed changes
         topPane.add(gameLogo, BorderLayout.CENTER);
 
         // Exclamation and Options button container
@@ -60,18 +58,16 @@ public class GameMenu extends JWindow {
         centerPane.setLayout(new BorderLayout());
         contenPane.add(centerPane, BorderLayout.CENTER);
 
-<<<<<<< Updated upstream
-
         // Play button
 
         playButton = new JButton(Papirus.loadImage(Papirus.PLAY_LOGO_64));
         playButton.setOpaque(false);
         centerPane.add(playButton, BorderLayout.CENTER);
-=======
-        playLogo = new JLabel(Papirus.loadImage(Papirus.OPTIONS_LOGO_64));
-        playLogo.setOpaque(false);
-        centerPane.add(playLogo, BorderLayout.CENTER);
->>>>>>> Stashed changes
+
+        playButton = new JButton(Papirus.loadImage(Papirus.OPTIONS_LOGO_64));
+        playButton.setOpaque(false);
+        centerPane.add(playButton, BorderLayout.CENTER);
+
 
         bottomPane = new Container();
         bottomPane.setLayout(new BorderLayout());
