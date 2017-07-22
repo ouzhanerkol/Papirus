@@ -13,12 +13,12 @@ import java.awt.*;
 public class GameMenu extends JWindow {
 
     EmptyBorder windowBorder;
-    Container contenPane, topPane, centerPane, bottomPane;
-    JLabel gameLogo, playLogo, highScoreLogo, quitLogo;
+    Container contenPane, topPane, centerPane, bottomPane, infoContainer;
+    JLabel gameLogo;
+    JButton playButton, infoButton, optionsButton , highScoreLogo, quitLogo;
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // screen size
 
     public GameMenu() {
-
 
         contenPane = getContentPane();
         setSize(500,500);
@@ -28,18 +28,36 @@ public class GameMenu extends JWindow {
         topPane = new Container();
         topPane.setLayout(new BorderLayout(100,100));
         contenPane.add(topPane, BorderLayout.NORTH);
+        contenPane.setBackground(Color.CYAN);
 
+
+        // Game logo
         gameLogo = new JLabel(Papirus.loadImage(Papirus.PAPIRUS_LOGO));
-        gameLogo.setOpaque(false); // TODO 1
         topPane.add(gameLogo, BorderLayout.CENTER);
+
+        // Exclamation and Options button container
+        infoContainer = new Container();
+        infoContainer.setLayout(new BorderLayout());
+        topPane.add(infoContainer, BorderLayout.EAST);
+
+        // Exclamation button
+        infoButton = new JButton(Papirus.loadImage(Papirus.INFO_LOGO_64));
+        infoContainer.add(infoButton, BorderLayout.WEST);
+
+        // Options button
+        optionsButton = new JButton(Papirus.loadImage(Papirus.OPTION_LOGO_64));
+        infoContainer.add(optionsButton, BorderLayout.EAST);
 
         centerPane = new Container();
         centerPane.setLayout(new BorderLayout());
         contenPane.add(centerPane, BorderLayout.CENTER);
 
-        playLogo = new JLabel(Papirus.loadImage(Papirus.PLAY_LOGO_64));
-        playLogo.setOpaque(false);
-        centerPane.add(playLogo, BorderLayout.CENTER);
+
+        // Play button
+
+        playButton = new JButton(Papirus.loadImage(Papirus.PLAY_LOGO_64));
+        playButton.setOpaque(false);
+        centerPane.add(playButton, BorderLayout.CENTER);
 
         bottomPane = new Container();
         bottomPane.setLayout(new BorderLayout());
