@@ -9,7 +9,7 @@ import javax.swing.*;
 public class Papirus {
 
     public static String EXIT_ICON = "",
-            PAPIRUS_LOGO = "assets/images/papirus_logo.png",
+            PAPIRUS_LOGO = "assets/images/papirusş_logo.png",
             PLAY_LOGO_64 = "assets/images/play_b4x64.png",
             INFO_LOGO_24 = "assets/images/exclam_png",
             OPTION_LOGO_24 = "assets/images/option4.png",
