@@ -15,14 +15,14 @@ import java.awt.event.ActionListener;
 public class GameMenu extends JWindow implements ActionListener {
 
     EmptyBorder windowBorder;
-    Container contenPane, topPane, centerPane, bottomPane, infoContainer, bottomLeft, bottomRight;
+    Container contentPane, topPane, centerPane, bottomPane, infoContainer, bottomLeft, bottomRight;
     JLabel gameLogo;
     JButton playButton, infoButton, highScoreButton, optionsButton, quitButton;
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // screen size
 
     public GameMenu() {
 
-        contenPane = getContentPane();
+        contentPane = getContentPane();
         setSize(500, 500);
         setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setBackground(Color.BLACK);
@@ -30,7 +30,7 @@ public class GameMenu extends JWindow implements ActionListener {
 
         topPane = new Container();
         topPane.setLayout(new BorderLayout(100, 100));
-        contenPane.add(topPane, BorderLayout.NORTH);
+        contentPane.add(topPane, BorderLayout.NORTH);
 
 
         // Game logo
@@ -64,9 +64,10 @@ public class GameMenu extends JWindow implements ActionListener {
         quitButton.addActionListener(this);
         infoContainer.add(quitButton, BorderLayout.EAST);
 
+        // content pane
         centerPane = new Container();
         centerPane.setLayout(new BorderLayout());
-        contenPane.add(centerPane, BorderLayout.CENTER);
+        contentPane.add(centerPane, BorderLayout.CENTER);
 
         // Play button
         playButton = new JButton(Papirus.loadImage(Papirus.PLAY_LOGO_128));
@@ -76,12 +77,11 @@ public class GameMenu extends JWindow implements ActionListener {
         playButton.setMargin(new Insets(0, 0, 0, 0));
         centerPane.add(playButton, BorderLayout.NORTH);
 
+
         // Botton pane
         bottomPane = new Container();
         bottomPane.setLayout(new BorderLayout());
-        contenPane.add(bottomPane, BorderLayout.SOUTH);
-
-        //
+        contentPane.add(bottomPane, BorderLayout.SOUTH);
 
         // HighScore button
         highScoreButton = new JButton(Papirus.loadImage(Papirus.CUP_LOGO_64));
@@ -99,9 +99,9 @@ public class GameMenu extends JWindow implements ActionListener {
         optionsButton.setMargin(new Insets(0, 0, 0, 0));
         bottomPane.add(optionsButton, BorderLayout.EAST);
 
-
-        windowBorder = new EmptyBorder(1, 1, 1, 1);
-        rootPane.setBorder(windowBorder);
+        // if we want to colored border for rootPane
+        // windowBorder = new EmptyBorder(1, 1, 1, 1);
+        // rootPane.setBorder(windowBorder);
     }
 
     public static void main(String[] args) {
@@ -114,6 +114,10 @@ public class GameMenu extends JWindow implements ActionListener {
 
         if (source.equals(quitButton)){
             System.exit(0);
+        }
+
+        if(source.equals(playButton)){
+            contentPane = new PlayPanel();
         }
 
     }
