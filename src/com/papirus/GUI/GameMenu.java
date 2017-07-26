@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -22,16 +23,17 @@ public class GameMenu extends JWindow implements ActionListener {
     JLabel gameLogo;
     JButton playButton, infoButton, highScoreButton, optionsButton, quitButton;
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // screen size
-    JPanel playPanel;
-    ImagePanel imagePanel;
 
-    public GameMenu() {
-        imagePanel = new ImagePanel();
-        imagePanel.setLayout(new BorderLayout());
+
+    public GameMenu() throws MalformedURLException {
+        URL url = new URL("https://raw.githubusercontent.com/ouzhanerkol/Papirus/master/src/com/papirus/assets/animated/giphy.gif");
+        Image image = new ImageIcon(url).getImage();
+
+        ImagePanel imagePanel = new ImagePanel(image);
         setContentPane(imagePanel);
+        imagePanel.setLayout(new BorderLayout());
         setSize(500, 500);
         setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        setBackground(Color.BLACK);
 
         topPane = new Container();
         topPane.setLayout(new BorderLayout(100, 100));
@@ -117,41 +119,25 @@ public class GameMenu extends JWindow implements ActionListener {
         private Image image;
 
         ImagePanel(Image image) {
-            this.image = image; /AAAAAAA
+            this.image = image;
         }
-
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         }
-
-        public static void main(String[] args) throws Exception {
-            URL url = new URL("http://i.stack.imgur.com/iQFxo.gif");
-            final Image image = new ImageIcon(url).getImage();
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    JFrame f = new JFrame("Image");
-                    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    f.setLocationByPlatform(true);
-
-                    ImagePanel imagePanel = new ImagePanel(image);
-                    imagePanel.setLayout(new GridLayout(5, 10, 10, 10));
-                    imagePanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-                    for (int ii = 1; ii < 51; ii++) {
-                        imagePanel.add(new JButton("" + ii));
-                    }
-
-                    f.setContentPane(imagePanel);
-                    f.pack();
-                    f.setVisible(true);
-                }
-            });
-        }
     }
 
-    public static void main(String[] args) {
-        new GameMenu().setVisible(true);
+    public static void main(String[] args) throws Exception {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new GameMenu().setVisible(true);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
