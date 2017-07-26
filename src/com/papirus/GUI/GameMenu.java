@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.net.URL;
 
 /**
  * Created by Çağatay Uslu on 21.07.2017.
@@ -116,7 +117,7 @@ public class GameMenu extends JWindow implements ActionListener {
         private Image image;
 
         ImagePanel(Image image) {
-            this.image = image;
+            this.image = image; /AAAAAAA
         }
 
         @Override
@@ -126,8 +127,8 @@ public class GameMenu extends JWindow implements ActionListener {
         }
 
         public static void main(String[] args) throws Exception {
-            URL url = new URL("");
-            final Image image = new ImageIcon();
+            URL url = new URL("http://i.stack.imgur.com/iQFxo.gif");
+            final Image image = new ImageIcon(url).getImage();
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     JFrame f = new JFrame("Image");
