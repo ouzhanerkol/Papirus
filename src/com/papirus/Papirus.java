@@ -1,7 +1,11 @@
 package com.papirus;
 
 
+import com.papirus.GUI.GameMenu;
+import com.sun.org.glassfish.gmbal.GmbalException;
+
 import javax.swing.*;
+import java.net.MalformedURLException;
 
 /**
  * Created by Çağatay Uslu on 21.07.2017.
@@ -27,6 +31,10 @@ public class Papirus {
             CLOSE_LOGO_128 = "assets/images/close-128x128.png",
             BACKGROUND_ANIMATION = "assets/animated/giphy.gif";
 
+    // Sounds
+    public static String PLAY_SOUND = "assets/play.wav",
+            EXIT_SOUND = "assets/exit.wav";
+
     public Papirus() {
     }
 
@@ -36,7 +44,17 @@ public class Papirus {
         return new ImageIcon(Papirus.class.getResource(loc));
     }
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws Exception {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new GameMenu().setVisible(true);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
+

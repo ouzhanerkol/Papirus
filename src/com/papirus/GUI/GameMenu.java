@@ -2,21 +2,27 @@ package com.papirus.GUI;
 
 import com.papirus.Papirus;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.io.File;
 
 /**
  * Created by Çağatay Uslu on 21.07.2017.
  */
-public class GameMenu extends JWindow implements ActionListener {
+public class GameMenu extends JWindow implements ActionListener, MouseListener{
 
     EmptyBorder windowBorder;
     Container contentPane, topPane, centerPane, bottomPane, infoContainer, bottomLeft, bottomRight;
@@ -28,6 +34,8 @@ public class GameMenu extends JWindow implements ActionListener {
     public GameMenu() throws MalformedURLException {
         URL url = new URL("https://raw.githubusercontent.com/ouzhanerkol/Papirus/master/src/com/papirus/assets/animated/giphy.gif");
         Image image = new ImageIcon(url).getImage();
+
+        playSound(Papirus.PLAY_SOUND);
 
         ImagePanel imagePanel = new ImagePanel(image);
         setContentPane(imagePanel);
@@ -83,6 +91,7 @@ public class GameMenu extends JWindow implements ActionListener {
         playButton.setBorderPainted(false);
         playButton.setMargin(new Insets(0, 0, 0, 0));
         playButton.addActionListener(this);
+        playButton.addMouseListener(this);
         centerPane.add(playButton, BorderLayout.NORTH);
 
 
@@ -114,6 +123,31 @@ public class GameMenu extends JWindow implements ActionListener {
 
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
     static class ImagePanel extends JPanel {
 
         private Image image;
@@ -128,27 +162,35 @@ public class GameMenu extends JWindow implements ActionListener {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new GameMenu().setVisible(true);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    public void playSound(String soundName)
+    {
+        try
+        {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+            clip.loop(clip.LOOP_CONTINUOUSLY);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace( );
+        }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton) e.getSource();
 
         if (source.equals(playButton)) {
-            new PlayPanel().setVisible(true);
+            PlayPanel p = new PlayPanel();
+            p.setVisible(true);
         }
 
         if (source.equals(quitButton)) {
+            playSound(Papirus.EXIT_SOUND);
             System.exit(0);
         }
 
