@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 /**
  * Created by Çağatay Uslu on 21.07.2017.
@@ -20,18 +22,19 @@ public class GameMenu extends JWindow implements ActionListener {
     JButton playButton, infoButton, highScoreButton, optionsButton, quitButton;
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // screen size
     JPanel playPanel;
+    ImagePanel imagePanel;
 
     public GameMenu() {
-
-        contentPane = getContentPane();
+        imagePanel = new ImagePanel();
+        imagePanel.setLayout(new BorderLayout());
+        setContentPane(imagePanel);
         setSize(500, 500);
         setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setBackground(Color.BLACK);
-        setLayout(new BorderLayout());
 
         topPane = new Container();
         topPane.setLayout(new BorderLayout(100, 100));
-        contentPane.add(topPane, BorderLayout.NORTH);
+        imagePanel.add(topPane, BorderLayout.NORTH);
 
 
         // Game logo
@@ -68,7 +71,7 @@ public class GameMenu extends JWindow implements ActionListener {
         // content pane
         centerPane = new Container();
         centerPane.setLayout(new BorderLayout());
-        contentPane.add(centerPane, BorderLayout.CENTER);
+        imagePanel.add(centerPane, BorderLayout.CENTER);
 
         // Play button
         playButton = new JButton(Papirus.loadImage(Papirus.PLAY_LOGO_128));
@@ -83,7 +86,7 @@ public class GameMenu extends JWindow implements ActionListener {
         // Botton pane
         bottomPane = new Container();
         bottomPane.setLayout(new BorderLayout());
-        contentPane.add(bottomPane, BorderLayout.SOUTH);
+        imagePanel.add(bottomPane, BorderLayout.SOUTH);
 
         // HighScore button
         highScoreButton = new JButton(Papirus.loadImage(Papirus.CUP_LOGO_64));
@@ -104,6 +107,46 @@ public class GameMenu extends JWindow implements ActionListener {
         // if we want to colored border for rootPane
         // windowBorder = new EmptyBorder(1, 1, 1, 1);
         // rootPane.setBorder(windowBorder);
+
+
+    }
+
+    static class ImagePanel extends JPanel {
+
+        private Image image;
+
+        ImagePanel(Image image) {
+            this.image = image;
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        }
+
+        public static void main(String[] args) throws Exception {
+            URL url = new URL("");
+            final Image image = new ImageIcon();
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    JFrame f = new JFrame("Image");
+                    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    f.setLocationByPlatform(true);
+
+                    ImagePanel imagePanel = new ImagePanel(image);
+                    imagePanel.setLayout(new GridLayout(5, 10, 10, 10));
+                    imagePanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+                    for (int ii = 1; ii < 51; ii++) {
+                        imagePanel.add(new JButton("" + ii));
+                    }
+
+                    f.setContentPane(imagePanel);
+                    f.pack();
+                    f.setVisible(true);
+                }
+            });
+        }
     }
 
     public static void main(String[] args) {
@@ -114,11 +157,11 @@ public class GameMenu extends JWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton) e.getSource();
 
-        if(source.equals(playButton)){
+        if (source.equals(playButton)) {
             new PlayPanel().setVisible(true);
         }
 
-        if (source.equals(quitButton)){
+        if (source.equals(quitButton)) {
             System.exit(0);
         }
 

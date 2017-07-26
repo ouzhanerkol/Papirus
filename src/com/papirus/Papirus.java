@@ -24,7 +24,8 @@ public class Papirus {
             CLOSE_LOGO_24 = "assets/images/close-24x24.png",
             CLOSE_LOGO_32 = "assets/images/close-32x32.png",
             CLOSE_LOGO_64 = "assets/images/close-64x64.png",
-            CLOSE_LOGO_128 = "assets/images/close-128x128.png";
+            CLOSE_LOGO_128 = "assets/images/close-128x128.png",
+            BACKGROUND_ANIMATION = "assets/animated/giphy.gif";
 
     public Papirus() {
     }
