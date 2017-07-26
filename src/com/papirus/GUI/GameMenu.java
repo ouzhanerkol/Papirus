@@ -19,6 +19,7 @@ public class GameMenu extends JWindow implements ActionListener {
     JLabel gameLogo;
     JButton playButton, infoButton, highScoreButton, optionsButton, quitButton;
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // screen size
+    JPanel playPanel;
 
     public GameMenu() {
 
@@ -75,6 +76,7 @@ public class GameMenu extends JWindow implements ActionListener {
         playButton.setContentAreaFilled(false);
         playButton.setBorderPainted(false);
         playButton.setMargin(new Insets(0, 0, 0, 0));
+        playButton.addActionListener(this);
         centerPane.add(playButton, BorderLayout.NORTH);
 
 
@@ -112,13 +114,14 @@ public class GameMenu extends JWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton) e.getSource();
 
+        if(source.equals(playButton)){
+            new PlayPanel().setVisible(true);
+        }
+
         if (source.equals(quitButton)){
             System.exit(0);
         }
 
-        if(source.equals(playButton)){
-            contentPane = new PlayPanel();
-        }
 
     }
 }

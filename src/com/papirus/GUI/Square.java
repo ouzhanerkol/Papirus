@@ -12,6 +12,7 @@ public class Square extends JButton {
     private Dimension width, height;
     private int number;
     private static Insets noInsets;
+    private Font font;
 
     static{
         noInsets = new Insets(0, 0, 0, 0);
